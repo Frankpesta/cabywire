@@ -169,14 +169,14 @@ export default function TermsPage() {
 									<p className="text-muted-foreground mb-4">
 										The Service and its original content, features, and
 										functionality are and will remain the exclusive property of
-										Cabwire Inc. and its licensors. The Service is protected by
-										copyright, trademark, and other laws of both the United
-										States and foreign countries.
+										Cabwire Technologies and its licensors. The Service is
+										protected by copyright, trademark, and other laws of both
+										the United States and foreign countries.
 									</p>
 									<p className="text-muted-foreground">
 										Our trademarks and trade dress may not be used in connection
 										with any product or service without the prior written
-										consent of Cabwire Inc.
+										consent of Cabwire Technologies
 									</p>
 								</div>
 							</motion.div>
@@ -205,7 +205,7 @@ export default function TermsPage() {
 								</h2>
 								<div className="bg-card p-6 rounded-xl border border-border/50">
 									<p className="text-muted-foreground mb-4">
-										In no event shall Cabwire Inc., nor its directors,
+										In no event shall Cabwire Technologies, nor its directors,
 										employees, partners, agents, suppliers, or affiliates, be
 										liable for any indirect, incidental, special, consequential
 										or punitive damages, including without limitation, loss of
