@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+
 import { submitWaitlistForm } from "@/actions/waitlist";
 
 import { Button } from "@/components/ui/button";
@@ -16,39 +17,62 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Validation schema with country
 const formSchema = z.object({
-	name: z.string().min(2, {
-		message: "Name must be at least 2 characters.",
-	}),
-	email: z.string().email({
-		message: "Please enter a valid email address.",
-	}),
-	city: z.string().min(2, {
-		message: "City must be at least 2 characters.",
-	}),
-	phone: z.string().min(10, {
-		message: "Please enter a valid phone number.",
-	}),
+	name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+	email: z.string().email({ message: "Please enter a valid email address." }),
+	country: z.enum(["US", "CA"], { required_error: "Country is required." }),
+	city: z.string().min(2, { message: "City is required." }),
+	phone: z.string().min(10, { message: "Please enter a valid phone number." }),
 });
+
+const countryOptions = [
+	{ value: "US", label: "USA" },
+	{ value: "CA", label: "Canada" },
+];
 
 export function WaitlistForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
+
+	const [selectedCountry, setSelectedCountry] = useState("US");
+	const [cityOptions, setCityOptions] = useState<string[]>([]);
+	const [loadingCities, setLoadingCities] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			name: "",
 			email: "",
+			country: "US",
 			city: "",
 			phone: "",
 		},
 	});
+
+	// Fetch cities from API when country changes
+	useEffect(() => {
+		async function fetchCities() {
+			setLoadingCities(true);
+			try {
+				const res = await fetch(`/api/cities?country=${selectedCountry}`);
+				if (!res.ok) throw new Error("Failed to fetch cities");
+				const data = await res.json();
+				setCityOptions(data.cities || []);
+			} catch {
+				setCityOptions([]);
+			} finally {
+				setLoadingCities(false);
+			}
+		}
+		fetchCities();
+		// Reset city field on country change
+		form.setValue("city", "");
+	}, [selectedCountry, form]);
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setIsSubmitting(true);
@@ -56,8 +80,8 @@ export function WaitlistForm() {
 			await submitWaitlistForm(values);
 			toast("You've been added to the waitlist! We'll notify you soon.");
 			setIsSuccess(true);
-			form.reset();
-		} catch (error) {
+			form.reset({ country: selectedCountry as "US" | "CA" });
+		} catch {
 			toast("Something went wrong. Please try again.");
 		} finally {
 			setIsSubmitting(false);
@@ -100,6 +124,7 @@ export function WaitlistForm() {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					{/* Name */}
 					<FormField
 						control={form.control}
 						name="name"
@@ -107,9 +132,9 @@ export function WaitlistForm() {
 							<FormItem>
 								<FormLabel>Full Name</FormLabel>
 								<FormControl>
-									<Input
+									<input
 										placeholder="John Doe"
-										className="h-12 rounded-lg"
+										className="h-12 rounded-lg w-full border px-3"
 										{...field}
 									/>
 								</FormControl>
@@ -117,6 +142,8 @@ export function WaitlistForm() {
 							</FormItem>
 						)}
 					/>
+
+					{/* Email */}
 					<FormField
 						control={form.control}
 						name="email"
@@ -124,10 +151,10 @@ export function WaitlistForm() {
 							<FormItem>
 								<FormLabel>Email</FormLabel>
 								<FormControl>
-									<Input
+									<input
 										placeholder="john@example.com"
 										type="email"
-										className="h-12 rounded-lg"
+										className="h-12 rounded-lg w-full border px-3"
 										{...field}
 									/>
 								</FormControl>
@@ -135,6 +162,37 @@ export function WaitlistForm() {
 							</FormItem>
 						)}
 					/>
+
+					{/* Country */}
+					<FormField
+						control={form.control}
+						name="country"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Country</FormLabel>
+								<FormControl>
+									<select
+										className="h-12 rounded-lg w-full border px-3"
+										{...field}
+										value={selectedCountry}
+										onChange={(e) => {
+											const country = e.target.value;
+											setSelectedCountry(country);
+											form.setValue("country", country as "US" | "CA");
+										}}>
+										{countryOptions.map((c) => (
+											<option key={c.value} value={c.value}>
+												{c.label}
+											</option>
+										))}
+									</select>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					{/* City */}
 					<FormField
 						control={form.control}
 						name="city"
@@ -142,16 +200,26 @@ export function WaitlistForm() {
 							<FormItem>
 								<FormLabel>City</FormLabel>
 								<FormControl>
-									<Input
-										placeholder="Toronto"
-										className="h-12 rounded-lg"
+									<select
+										className="h-12 rounded-lg w-full border px-3"
 										{...field}
-									/>
+										disabled={loadingCities || cityOptions.length === 0}>
+										<option value="">
+											{loadingCities ? "Loading cities..." : "Select a city"}
+										</option>
+										{cityOptions.map((city, i) => (
+											<option key={i} value={city}>
+												{city}
+											</option>
+										))}
+									</select>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
+
+					{/* Phone */}
 					<FormField
 						control={form.control}
 						name="phone"
@@ -159,9 +227,9 @@ export function WaitlistForm() {
 							<FormItem>
 								<FormLabel>Phone Number</FormLabel>
 								<FormControl>
-									<Input
+									<input
 										placeholder="(123) 456-7890"
-										className="h-12 rounded-lg"
+										className="h-12 rounded-lg w-full border px-3"
 										{...field}
 									/>
 								</FormControl>
@@ -170,6 +238,7 @@ export function WaitlistForm() {
 						)}
 					/>
 				</div>
+
 				<Button
 					type="submit"
 					className="w-full h-12 rounded-lg bg-gradient-primary hover:opacity-90 transition-all"
@@ -184,8 +253,9 @@ export function WaitlistForm() {
 						"Join the Waitlist"
 					)}
 				</Button>
+
 				<FormDescription className="text-center">
-					That's it — we'll handle the rest.
+					That's it - we'll handle the rest.
 				</FormDescription>
 			</form>
 		</Form>

@@ -33,7 +33,7 @@ export default function RootLayout({
 						<main className="flex-1 pt-16">{children}</main>
 						<Footer />
 					</div>
-					<Toaster />
+					<Toaster position="top-right" />
 				</ThemeProvider>
 			</body>
 		</html>
