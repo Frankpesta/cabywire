@@ -22,30 +22,43 @@ export function Footer() {
 							Ride with Freedom. Drive with Purpose.
 						</p>
 						<div className="flex space-x-4">
-							<Link
-								href="#"
+							<a
+								href="https://www.facebook.com/share/1J6ctsLjBR/?mibextid=wwXIfr"
 								className="text-muted-foreground hover:text-primary transition-colors">
 								<Facebook size={20} />
 								<span className="sr-only">Facebook</span>
-							</Link>
-							<Link
-								href="#"
+							</a>
+							<a
+								href="https://x.com/cabwireapp?s=21&t=SYrog4wVA60S1Y5_epinEg"
 								className="text-muted-foreground hover:text-primary transition-colors">
 								<Twitter size={20} />
 								<span className="sr-only">Twitter</span>
-							</Link>
-							<Link
-								href="#"
+							</a>
+							<a
+								href="https://www.instagram.com/cabwireapp?igsh=OGoxanY0NWl4emI%3D&utm_source=qr"
 								className="text-muted-foreground hover:text-primary transition-colors">
 								<Instagram size={20} />
 								<span className="sr-only">Instagram</span>
-							</Link>
-							<Link
-								href="#"
+							</a>
+							<a
+								href="https://www.linkedin.com/company/cabwireapp/"
 								className="text-muted-foreground hover:text-primary transition-colors">
 								<Linkedin size={20} />
 								<span className="sr-only">LinkedIn</span>
-							</Link>
+							</a>
+							<a
+								href="https://www.tiktok.com/@cabwire?_t=ZS-8wPZRWjE8sy&_r=1"
+								className="text-muted-foreground hover:text-primary transition-colors">
+								<Image
+									src={"/tiktok.svg"}
+									width={20}
+									height={20}
+									alt="tiktok"
+									sizes="icon"
+									className="object-cover"
+								/>
+								<span className="sr-only">TikTok</span>
+							</a>
 						</div>
 					</div>
 
@@ -61,23 +74,16 @@ export function Footer() {
 							</li>
 							<li>
 								<Link
-									href="#"
+									href="#waitlist"
 									className="text-muted-foreground hover:text-primary transition-colors">
-									Careers
+									Waitlist
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="#"
+									href="#faq"
 									className="text-muted-foreground hover:text-primary transition-colors">
-									Press
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="#"
-									className="text-muted-foreground hover:text-primary transition-colors">
-									Blog
+									FAQ
 								</Link>
 							</li>
 						</ul>
@@ -105,13 +111,6 @@ export function Footer() {
 									href="/cookie-policy"
 									className="text-muted-foreground hover:text-primary transition-colors">
 									Cookie Policy
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="#"
-									className="text-muted-foreground hover:text-primary transition-colors">
-									Licenses
 								</Link>
 							</li>
 						</ul>

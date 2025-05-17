@@ -26,6 +26,8 @@ const fadeIn = {
 	},
 };
 
+const images = ["/p1.jpg", "/p2.jpg", "/p3.jpg", "/p4.jpg"];
+
 const staggerContainer = {
 	hidden: { opacity: 0 },
 	visible: {
@@ -109,7 +111,7 @@ export default function Home() {
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.6, delay: 0.4 }}
-									className="flex flex-col sm:flex-row gap-4">
+									className="flex flex-row gap-4">
 									<Link href="#waitlist">
 										<Button
 											size="lg"
@@ -132,13 +134,20 @@ export default function Home() {
 									initial={{ opacity: 0 }}
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.6, delay: 0.6 }}
-									className="mt-12 flex items-center gap-8">
+									className="mt-12 flex items-center gap-4">
 									<div className="flex -space-x-4">
-										{[1, 2, 3, 4].map((i) => (
+										{images.map((i) => (
 											<div
 												key={i}
 												className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/80 to-blue-600/80 border-2 border-background flex items-center justify-center text-white text-xs font-bold">
-												{i}
+												<Image
+													src={i}
+													alt="people"
+													width={100}
+													height={100}
+													objectFit="cover"
+													className="object-cover rounded-[100%] w-full h-full"
+												/>
 											</div>
 										))}
 									</div>
@@ -690,7 +699,7 @@ export default function Home() {
 			</Section>
 
 			{/* FAQ Section */}
-			<Section className="py-24">
+			<Section className="py-24" id="faq">
 				<div className="container mx-auto px-4">
 					<div className="text-center max-w-3xl mx-auto mb-16">
 						<h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">
@@ -746,7 +755,7 @@ export default function Home() {
 							Cabwire is calling. Your seat's waiting.
 						</p>
 
-						<div className="flex flex-col sm:flex-row gap-4 justify-center">
+						<div className="flex flex-row gap-4 justify-center">
 							<Link href="#waitlist">
 								<Button
 									size="lg"
