@@ -111,7 +111,7 @@ export default function Home() {
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.6, delay: 0.4 }}
-									className="flex flex-row gap-4">
+									className="flex flex-col md:flex-row gap-4">
 									<Link href="#waitlist">
 										<Button
 											size="lg"
@@ -755,7 +755,7 @@ export default function Home() {
 							Cabwire is calling. Your seat's waiting.
 						</p>
 
-						<div className="flex flex-row gap-4 justify-center">
+						<div className="flex flex-col md:flex-row gap-4 justify-center">
 							<Link href="#waitlist">
 								<Button
 									size="lg"
