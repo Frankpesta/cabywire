@@ -655,7 +655,7 @@ export default function Home() {
 									<div className="mr-4 mt-1 bg-primary/10 p-1 rounded-full">
 										<CheckCircle className="h-5 w-5 text-primary" />
 									</div>
-									<p>You're at least 21 years old</p>
+									<p>You're at least 18 years old</p>
 								</div>
 							</motion.div>
 

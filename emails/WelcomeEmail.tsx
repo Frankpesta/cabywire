@@ -20,11 +20,11 @@ interface WelcomeEmailProps {
 
 export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
 	name,
-	logoUrl = "https://cabwire.com/logo.svg", // Replace with your actual logo URL
+	logoUrl = "https://cabwire.com/logo.svg",
 }) => (
 	<Html lang="en">
 		<Head />
-		<Preview>Welcome to the waitlist!</Preview>
+		<Preview>You're Now on the Cabwire Waitlist! 🚗</Preview>
 		<Body
 			style={{
 				fontFamily: "Arial, sans-serif",
@@ -45,34 +45,144 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
 				<Section style={{ textAlign: "center", marginBottom: "24px" }}>
 					<Img
 						src={logoUrl}
-						alt="Company Logo"
+						alt="Cabwire Logo"
 						width={120}
 						height="auto"
 						style={{ margin: "0 auto", display: "block" }}
 					/>
 				</Section>
 
-				{/* Greeting */}
+				{/* Header */}
 				<Section>
 					<Heading
 						style={{
-							color: "#111827",
-							fontSize: "24px",
-							marginBottom: "16px",
+							color: "#3b82f6",
+							fontSize: "22px",
+							marginBottom: "8px",
 							textAlign: "center",
 						}}>
-						Hi {name},
+						Urban mobility is about to get better - and you're first in line
 					</Heading>
+				</Section>
+
+				{/* Body */}
+				<Section>
+					<Text
+						style={{
+							color: "#111827",
+							fontSize: "16px",
+							lineHeight: "26px",
+							marginBottom: "18px",
+						}}>
+						Hey {name},
+					</Text>
 					<Text
 						style={{
 							color: "#6b7280",
 							fontSize: "16px",
-							lineHeight: "24px",
-							textAlign: "center",
+							lineHeight: "26px",
+							marginBottom: "16px",
+						}}>
+						Thanks for signing up to join <b>Cabwire</b> - where your ride
+						experience is about to become faster, fairer, and smarter. 🚦
+					</Text>
+					<Text
+						style={{
+							color: "#111827",
+							fontSize: "16px",
+							lineHeight: "26px",
+							marginBottom: "16px",
+						}}>
+						We're building an AI-powered ride-hailing platform designed around
+						the real needs of today’s riders and drivers:
+					</Text>
+					<ul
+						style={{
+							color: "#3b82f6",
+							fontSize: "16px",
+							margin: "0 0 16px 20px",
+							padding: 0,
+						}}>
+						<li>Transparent pricing</li>
+						<li>Seamless city-level routing</li>
+						<li>Empowered local drivers</li>
+						<li>Human-first, tech-enhanced service</li>
+					</ul>
+					<Text
+						style={{
+							color: "#111827",
+							fontSize: "16px",
+							lineHeight: "26px",
+							marginBottom: "16px",
+						}}>
+						As part of our early access community, you’ll get:
+					</Text>
+					<ul
+						style={{
+							color: "#10b981",
+							fontSize: "16px",
+							margin: "0 0 16px 20px",
+							padding: 0,
+						}}>
+						<li>✅ Priority access when we go live in your city</li>
+						<li>✅ Rider perks and promo codes</li>
+						<li>✅ A chance to shape the platform before the world sees it</li>
+					</ul>
+					<Text
+						style={{
+							color: "#6b7280",
+							fontSize: "16px",
+							lineHeight: "26px",
+							marginBottom: "16px",
+						}}>
+						We’ll be in touch soon with launch updates and app previews. Until
+						then, follow us on{" "}
+						<a
+							href="https://linkedin.com/company/cabwire"
+							style={{ color: "#3b82f6", textDecoration: "underline" }}>
+							LinkedIn
+						</a>
+						,{" "}
+						<a
+							href="https://instagram.com/cabwire"
+							style={{ color: "#3b82f6", textDecoration: "underline" }}>
+							Instagram
+						</a>
+						, and{" "}
+						<a
+							href="https://twitter.com/cabwire"
+							style={{ color: "#3b82f6", textDecoration: "underline" }}>
+							X/Twitter
+						</a>{" "}
+						to see how we're putting people and cities back at the heart of
+						mobility.
+					</Text>
+					<Text
+						style={{
+							color: "#111827",
+							fontSize: "16px",
+							lineHeight: "26px",
+							marginBottom: "8px",
+						}}>
+						Thanks again for believing in a new way to ride.
+					</Text>
+					<Text
+						style={{
+							color: "#3b82f6",
+							fontSize: "16px",
+							fontWeight: "bold",
+							marginBottom: "4px",
+						}}>
+						- Team Cabwire
+					</Text>
+					<Text
+						style={{
+							color: "#6b7280",
+							fontSize: "14px",
+							fontStyle: "italic",
 							marginBottom: "24px",
 						}}>
-						Thank you for joining our waitlist! We're excited to have you on
-						board and will notify you as soon as we launch in your area.
+						Your city. Your ride. Your way.
 					</Text>
 				</Section>
 
