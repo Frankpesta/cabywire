@@ -20,7 +20,7 @@ interface WelcomeEmailProps {
 
 export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
 	name,
-	logoUrl = "https://cabwire.com/logo.svg",
+	logoUrl = "https://www.cabwire.com/logo.svg",
 }) => (
 	<Html lang="en">
 		<Head />
