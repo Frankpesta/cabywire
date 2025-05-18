@@ -20,7 +20,7 @@ interface WelcomeEmailProps {
 
 export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
 	name,
-	logoUrl = "https://cabwire.com/logo.svg",
+	logoUrl = "https://www.cabwire.com/logo.svg",
 }) => (
 	<Html lang="en">
 		<Head />
@@ -138,19 +138,19 @@ export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({
 						We’ll be in touch soon with launch updates and app previews. Until
 						then, follow us on{" "}
 						<a
-							href="https://linkedin.com/company/cabwire"
+							href="https://www.linkedin.com/company/cabwireapp/"
 							style={{ color: "#3b82f6", textDecoration: "underline" }}>
 							LinkedIn
 						</a>
 						,{" "}
 						<a
-							href="https://instagram.com/cabwire"
+							href="https://www.instagram.com/cabwireapp?igsh=OGoxanY0NWl4emI%3D&utm_source=qr"
 							style={{ color: "#3b82f6", textDecoration: "underline" }}>
 							Instagram
 						</a>
 						, and{" "}
 						<a
-							href="https://twitter.com/cabwire"
+							href="https://x.com/cabwireapp?s=21&t=SYrog4wVA60S1Y5_epinEg"
 							style={{ color: "#3b82f6", textDecoration: "underline" }}>
 							X/Twitter
 						</a>{" "}
